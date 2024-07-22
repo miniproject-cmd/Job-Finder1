@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Manage Companies</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .rounded-circle {
+            width: 150px; /* Adjust size as needed */
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .card {
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Admin - Manage Companies</h1>
+        <div id="adminCompanyList" class="row mt-4"></div>
+    </div>
+
+    <!-- Modal for Company Details -->
+    <div class="modal fade" id="companyDetailsModal" tabindex="-1" role="dialog" aria-labelledby="companyDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="companyDetailsModalLabel">Company Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="companyDetailsBody">
+                    <!-- Company details will be displayed here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const adminCompanyList = document.getElementById('adminCompanyList');
+
+            // Function to get companies from local storage
+            function getCompanies() {
+                return JSON.parse(localStorage.getItem('companies')) || [];
+            }
+
+            // Function to save companies to local storage
+            function saveCompanies(companies) {
+                localStorage.setItem('companies', JSON.stringify(companies));
+            }
+
+            // Function to display companies with details and delete options
+            function displayAdminCompanies() {
+                const companies = getCompanies();
+                adminCompanyList.innerHTML = '';
+                if (companies.length === 0) {
+                    adminCompanyList.innerHTML = '<p>No companies added yet.</p>';
+                } else {
+                    companies.forEach((company, index) => {
+                        const cardHtml = `
+                            <div class="col-md-4 mb-4">
+                                <div class="card shadow">
+                                    <img src="${company.logo}" class="card-img-top rounded-circle" alt="${company.name} Logo">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${company.name}</h5>
+                                        <p class="card-text">${company.description}</p>
+                                        <button class="btn btn-primary" onclick="viewDetails(${index})" data-toggle="modal" data-target="#companyDetailsModal">View Details</button>
+                                        <button class="btn btn-danger ml-2" onclick="deleteCompany(${index})">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        adminCompanyList.innerHTML += cardHtml;
+                    });
+                }
+            }
+
+            // Function to view details of a company
+            window.viewDetails = function(index) {
+                const companies = getCompanies();
+                const company = companies[index];
+                const detailsHtml = `
+                    <h5>${company.name} Details:</h5>
+                    <p>Description: ${company.description}</p>
+                    <p>Link: <a href="${company.link}" target="_blank">${company.link}</a></p>
+                    <p>Email: ${company.email}</p>
+                `;
+                document.getElementById('companyDetailsBody').innerHTML = detailsHtml;
+            };
+
+            // Function to delete a company
+            window.deleteCompany = function(index) {
+                if (confirm('Are you sure you want to delete this company?')) {
+                    const companies = getCompanies();
+                    companies.splice(index, 1);
+                    saveCompanies(companies);
+                    displayAdminCompanies();
+                }
+            };
+
+            // Initial display of companies when page loads
+            displayAdminCompanies();
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

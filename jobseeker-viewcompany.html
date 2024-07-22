@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Seeker - View Companies</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .rounded-circle {
+            width: 150px; /* Adjust size as needed */
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .card {
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Job Seeker - View Companies</h1>
+        <div id="jobSeekerCompanyList" class="row mt-4"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const jobSeekerCompanyList = document.getElementById('jobSeekerCompanyList');
+
+            // Function to get companies from local storage
+            function getCompanies() {
+                return JSON.parse(localStorage.getItem('companies')) || [];
+            }
+
+            // Function to display companies in job seeker view
+            function displayJobSeekerCompanies() {
+                const companies = getCompanies();
+                jobSeekerCompanyList.innerHTML = '';
+                if (companies.length === 0) {
+                    jobSeekerCompanyList.innerHTML = '<p>No companies added yet.</p>';
+                } else {
+                    companies.forEach((company, index) => {
+                        const cardHtml = `
+                            <div class="col-md-4 mb-4">
+                                <div class="card shadow">
+                                    <img src="${company.logo}" class="card-img-top rounded-circle" alt="${company.name} Logo">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${company.name}</h5>
+                                        <p class="card-text">${company.description}</p>
+                                        <button class="btn btn-primary" onclick="viewQualifications(${index})">View Qualifications</button>
+                                        <button class="btn btn-outline-danger" onclick="notInterested(${index})">Not Interested</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        jobSeekerCompanyList.innerHTML += cardHtml;
+                    });
+                }
+            }
+
+            // Function to view qualifications of a company
+            window.viewQualifications = function(index) {
+                const companies = getCompanies();
+                const company = companies[index];
+                const qualifications = `
+                    <div>
+                        <h5>${company.name} Qualifications:</h5>
+                        <p>Description: ${company.description}</p>
+                        <p>Link: <a href="${company.link}" target="_blank">${company.link}</a></p>
+                        <button class="btn btn-success" onclick="sendResume('${company.email}')">Apply by Email</button>
+                        <button class="btn btn-primary" onclick="backToDefault()">Back to Company List</button>
+                    </div>
+                `;
+                jobSeekerCompanyList.innerHTML = qualifications;
+            };
+
+            // Function to handle back to default list button
+            window.backToDefault = function() {
+                displayJobSeekerCompanies();
+            };
+
+            // Function when job seeker is not interested in a company
+            window.notInterested = function(index) {
+                const companies = getCompanies();
+                const company = companies[index];
+                
+                // Add to reconsideration list (local storage)
+                let reconsideredCompanies = JSON.parse(localStorage.getItem('reconsideredCompanies')) || [];
+                reconsideredCompanies.push(company);
+                localStorage.setItem('reconsideredCompanies', JSON.stringify(reconsideredCompanies));
+
+                // Remove from main list (local storage)
+                companies.splice(index, 1);
+                localStorage.setItem('companies', JSON.stringify(companies));
+
+                // Display default companies list
+                displayJobSeekerCompanies();
+            };
+
+            // Initial display of companies when page loads
+            displayJobSeekerCompanies();
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

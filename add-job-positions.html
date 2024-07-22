@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add or Remove Companies</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .rounded-circle {
+            width: 150px; /* Adjust size as needed */
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .profile-pic {
+            width: 150px; /* Adjust size as needed */
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .card {
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Manage Companies</h1>
+        
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="add-tab" data-toggle="tab" href="#add" role="tab" aria-controls="add" aria-selected="true">Add Companies</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="remove-tab" data-toggle="tab" href="#remove" role="tab" aria-controls="remove" aria-selected="false">Remove Companies</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="add" role="tabpanel" aria-labelledby="add-tab">
+                <form id="addCompanyForm" class="mt-4">
+                    <div class="form-group">
+                        <label for="companyName">Company Name</label>
+                        <input type="text" class="form-control" id="companyName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="companyDescription">Company Description</label>
+                        <textarea class="form-control" id="companyDescription" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="companyLogo">Company Logo</label>
+                        <input type="file" class="form-control-file" id="companyLogo" accept="image/*" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="companyLink">Company Link</label>
+                        <input type="text" class="form-control" id="companyLink" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="companyEmail">Company Email</label>
+                        <input type="email" class="form-control" id="companyEmail" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Company</button>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="remove" role="tabpanel" aria-labelledby="remove-tab">
+                <div id="companyList" class="row mt-4"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const addCompanyForm = document.getElementById('addCompanyForm');
+            const companyList = document.getElementById('companyList');
+
+            // Function to get companies from local storage
+            function getCompanies() {
+                return JSON.parse(localStorage.getItem('companies')) || [];
+            }
+
+            // Function to save companies to local storage
+            function saveCompanies(companies) {
+                localStorage.setItem('companies', JSON.stringify(companies));
+            }
+
+            // Function to display companies in the list
+            function displayCompanies() {
+                const companies = getCompanies();
+                companyList.innerHTML = '';
+                if (companies.length === 0) {
+                    companyList.innerHTML = '<p>No companies added yet.</p>';
+                } else {
+                    companies.forEach((company, index) => {
+                        const cardHtml = `
+                            <div class="col-md-4 mb-4">
+                                <div class="card shadow">
+                                    <img src="${company.logo}" class="card-img-top rounded-circle" alt="${company.name} Logo">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${company.name}</h5>
+                                        <p class="card-text">${company.description}</p>
+                                        <button class="btn btn-danger" onclick="removeCompany(${index})">Remove Company</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        companyList.innerHTML += cardHtml;
+                    });
+                }
+            }
+
+            // Event listener for form submission
+            addCompanyForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('companyName').value;
+                const description = document.getElementById('companyDescription').value;
+                const logo = document.getElementById('companyLogo').files[0]; // File input
+                const link = document.getElementById('companyLink').value;
+                const email = document.getElementById('companyEmail').value;
+
+                // Convert logo file to base64 string
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const logoBase64 = event.target.result;
+                    
+                    // Get current list of companies
+                    const companies = getCompanies();
+
+                    // Add new company to the list
+                    companies.push({ name, description, logo: logoBase64, link, email, expired: false });
+
+                    // Save updated list to local storage
+                    saveCompanies(companies);
+
+                    // Display updated list
+                    displayCompanies();
+
+                    // Reset form
+                    addCompanyForm.reset();
+
+                    // Optionally provide feedback to the user
+                    alert('Company added successfully!');
+                };
+                reader.readAsDataURL(logo); // Read file as data URL
+            });
+
+            // Function to remove a company
+            window.removeCompany = function(index) {
+                const companies = getCompanies();
+                companies.splice(index, 1); // Remove company at given index
+                saveCompanies(companies); // Save updated list to local storage
+                displayCompanies(); // Display updated list
+            };
+
+            // Initial display of companies when page loads
+            displayCompanies();
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

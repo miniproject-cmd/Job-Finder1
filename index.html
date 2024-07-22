@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recruitment Process</title>
+  <link rel="stylesheet" href="mainpage.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://kit.fontawesome.com/ac42c3b1f7.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="pics/job-finder-high-resolution-logo-black-transparent.png" class="logo" alt="Company Logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ml-auto">
+          <a class="nav-link active" href="#wcuSection">Sign In</a>
+          <a class="nav-link" href="#placementsSection">Placements</a>
+          <a class="nav-link" href="#exploreMenuSection">Recruitment Process</a>
+          <a class="nav-link" href="#followUsSection">Follow Us</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="banner-section-bg-container d-flex justify-content-center flex-column">
+    <div class="container text-center">
+      <h1 class="banner-heading mb-3">"Unlock Your Future: Discover Your Dream Job with Us!"</h1>
+      <p class="banner-caption mb-4">"Where Opportunities Meet Talent: Your Perfect Job Awaits"</p>
+      <button class="custom-button" onclick="location.href='about.html'">Know About Us !</button>
+    </div>
+  </div>
+
+  <div class="wcu-section pt-5 pb-5" id="wcuSection">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1 class="wcu-section-heading">"Welcome Back! Choose Your Role to Get Started: Admin, Recruiter, or Job Seeker"</h1>
+          <p class="wcu-section-description">Empower Your Journey: Sign In as an Admin, Recruiter, or Job Seeker to Unlock Opportunities</p>
+        </div>
+        
+        <div class="col-12 col-md-4">
+          <div class="wcu-card p-3 mb-3">
+            <img src="pics/uicon.webp" class="wcu-card-image" alt="Administrator">
+            <h1 class="wcu-card-title mt-3">Administrator</h1>
+            <button class="custom-button" onclick="redirectToLogin('administrator')">Sign In</button>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="wcu-card p-3 mb-3">
+            <img src="pics/uicon.webp" class="wcu-card-image" alt="Recruiter">
+            <h1 class="wcu-card-title mt-3">Recruiter</h1>
+            <button class="custom-button" onclick="redirectToLogin('recruiter')">Sign In</button>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="wcu-card p-3 mb-3">
+            <img src="pics/uicon.webp" class="wcu-card-image" alt="Job Seeker">
+            <h1 class="wcu-card-title mt-3">Job Seeker</h1>
+            <button class="custom-button" onclick="redirectToLogin('jobseeker')">Sign In</button>
+          </div>
+        </div>
+        
+        <!-- JavaScript to handle redirection -->
+        <script>
+          function redirectToLogin(role) {
+            switch (role) {
+              case 'administrator':
+                window.location.href = 'admin.html'; // Redirect to admin login page
+                break;
+              case 'recruiter':
+                window.location.href = 'recruiter.html'; // Redirect to recruiter login page
+                break;
+              case 'jobseeker':
+                window.location.href = 'jobseeker.html'; // Redirect to job seeker login page
+                break;
+              default:
+                // Handle any other roles or fallback
+                break;
+            }
+          }
+        </script>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="container my-5" id="placementsSection">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="text-center mb-4">Top Companies and Placements</h2>
+      </div>
+    </div>
+  
+    <div class="row">
+      <!-- Main Topcards Section -->
+      <div class="col-md-12">
+        <div class="d-flex flex-row maintopcards">
+
+          <div class="topcards">
+            <h1>Google</h1>
+            <ul class="none">
+              <li>Package: 65 LPA</li>
+              <li>Students Placed: 5</li>
+            </ul>
+            <div class="companies">
+              <img src="pics/GOOGLE.jpg" alt="Google Logo">
+            </div>
+          </div>
+
+          <div class="topcards">
+            <h1>Microsoft</h1>
+            <ul class="none">
+              <li>Package: 60 LPA</li>
+              <li>Students Placed: 4</li>
+            </ul>
+            <div class="companies">
+              <img src="pics/Microsoft_icon.svg" alt="Microsoft Logo">
+            </div>
+          </div>
+
+          <div class="topcards">
+            <h1>Facebook</h1>
+            <ul class="none">
+              <li>Package: 70 LPA</li>
+              <li>Students Placed: 3</li>
+            </ul>
+            <div class="companies">
+              <img src="pics/facebook-icon-512x512-seb542ju.webp" alt="Facebook Logo">
+            </div>
+          </div>
+
+        </div>
+      </div>
+  
+      <!-- Other Big Placements This Year Section -->
+      <div class="col-md-12">
+        <div class="placements2">
+          <marquee behavior="scroll" direction="left" scrollamount="10" onmouseover="this.stop();" onmouseout="this.start();">
+            <span>Other Company Offers This Year || Virtusa(200) || Cybage(33) || Delta(15) || PremierEnergies(25) || RES(23) || WittIndia(64) And Many More </span>
+          </marquee>
+        </div>
+  
+        <div class="placements2 my-5">
+          <p class="placements text-center font-weight-bold">Other Big Placements This Year !</p>
+          <hr>
+          <div class="row text-center">
+            <div class="col-6 col-md-4 col-lg-2 mb-3">
+              <div class="company">
+                <div class="images1 bg-secondary mb-2" style="height: 100px;"></div>
+                <ul class="list-unstyled">
+                  <li>180</li>
+                  <li>Students</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-2 mb-3">
+              <div class="company">
+                <div class="images2 bg-secondary mb-2" style="height: 100px;"></div>
+                <ul class="list-unstyled">
+                  <li>115</li>
+                  <li>Students</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-2 mb-3">
+              <div class="company">
+                <div class="images3 bg-secondary mb-2" style="height: 100px;"></div>
+                <ul class="list-unstyled">
+                  <li>225</li>
+                  <li>Students</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-2 mb-3">
+              <div class="company">
+                <div class="images4 bg-secondary mb-2" style="height: 100px;"></div>
+                <ul class="list-unstyled">
+                  <li>190</li>
+                  <li>Students</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-2 mb-3">
+              <div class="company">
+                <div class="images5 bg-secondary mb-2" style="height: 100px;"></div>
+                <ul class="list-unstyled">
+                  <li>70</li>
+                  <li>Students</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-2 mb-3">
+              <div class="company">
+                <div class="images6 bg-secondary mb-2" style="height: 100px;"></div>
+                <ul class="list-unstyled">
+                  <li>30</li>
+                  <li>Students</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+
+  <div class="explore-menu-section pt-5 pb-5" id="exploreMenuSection">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 mb-3 text-center">
+          <h1 class="menu-section-heading">Connecting Talent with Opportunity: Our Proven Recruitment Process</h1>
+        </div>
+        <div class="d-flex flex-column col-md-4">
+          <div class="process d-flex flex-row p-3 mb-2">
+            <h1>1</h1>
+            <p>Define job requirements and create job description.</p>
+          </div>
+          <div class="process d-flex flex-row p-3 mb-2">
+            <h1>2</h1>
+            <p>Advertise job opening on appropriate platforms.</p>
+          </div>
+          <div class="process d-flex flex-row  p-3 mb-2">
+            <h1>3</h1>
+            <p>Screen incoming resumes and applications.</p>
+          </div>
+          <div class="process d-flex flex-row  p-3 mb-2">
+            <h1>4</h1>
+            <p>Conduct initial phone or video interviews.</p>
+          </div>
+        </div>
+        <div class="d-flex flex-column col-12 col-md-4">
+          <div class="process d-flex flex-row  p-3 mb-2">
+            <h1>5</h1>
+            <p>Schedule in-person or virtual interviews with hiring team.</p>
+          </div>
+          <div class="process d-flex flex-row  p-3 mb-2">
+            <h1>6</h1>
+            <p>Evaluate candidates based on skills and culture fit.</p>
+          </div>
+          <div class="process d-flex flex-row  p-3 mb-2">
+            <h1>7</h1>
+            <p>Check references and perform background checks.</p>
+          </div>
+          <div class="process d-flex flex-row  p-3 mb-2">
+            <h1>8</h1>
+            <p>Select final candidate and extend job offer.</p>
+          </div>
+        </div>
+        <div class="d-flex flex-column col-12 col-md-4">
+          <div class="process d-flex flex-row  p-3 mb-2">
+            <h1>9</h1>
+            <p>Negotiate salary, benefits, and start date.</p>
+          </div>
+          <div class="process d-flex flex-row  p-3 mb-2">
+            <h1>10</h1>
+            <p>Confirm acceptance of job offer.</p>
+          </div>
+          <div class="process d-flex flex-row  p-3 mb-2">
+            <h1>11</h1>
+            <p>Complete necessary hiring paperwork and contracts.</p>
+          </div>
+          <div class="process d-flex flex-row  p-3 mb-2">
+            <h1>12</h1>
+            <p>Onboard new hire and facilitate training and integration.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="follow-section pt-5 pb-5" id="followUsSection">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1 class="follow-section-heading mb-3">Stay Connected: Follow Us on Social Media for Updates and Insights!</h1>
+          <p class="follow-section-description mb-4">Join Our Community: Follow Us on Social Media to Stay Updated and Engaged!</p>
+          <div class="social-media-icons d-flex justify-content-center">
+            <a href="https://www.facebook.com" class="social-icon">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.twitter.com" class="social-icon">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.linkedin.com" class="social-icon">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://www.instagram.com" class="social-icon">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer pt-3 pb-3 text-center">
+    <p class="mb-0">&copy; 2024 Recruitment Company. All rights reserved.</p>
+  </div>
+
+</body>
+</html>

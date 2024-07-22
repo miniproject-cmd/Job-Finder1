@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View/Edit Profile - JobSeeker</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            padding-top: 70px; /* Adjust this value based on your navbar height */
+            background-color: #f8f9fa;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .profile-pic {
+            max-width: 200px;
+            height: auto;
+        }
+    </style>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                JobSeeker
+            </a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form id="profileForm" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" class="form-control" id="age" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select class="form-control" id="status" required>
+                            <option value="studying">Studying</option>
+                            <option value="passedOut">Passed Out</option>
+                        </select>
+                    </div>
+                    <div id="studyFields" style="display: none;">
+                        <div class="form-group">
+                            <label for="yearOfStudy">Year of Study</label>
+                            <input type="number" class="form-control" id="yearOfStudy">
+                        </div>
+                        <div class="form-group">
+                            <label for="course">Course</label>
+                            <input type="text" class="form-control" id="course">
+                        </div>
+                    </div>
+                    <div id="experienceFields" style="display: none;">
+                        <div class="form-group">
+                            <label for="yearsOfExperience">Years of Experience</label>
+                            <input type="number" class="form-control" id="yearsOfExperience">
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldOfExperience">Field of Experience</label>
+                            <input type="text" class="form-control" id="fieldOfExperience">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="skills">Skills</label>
+                        <input type="text" class="form-control" id="skills">
+                    </div>
+                    <div class="form-group">
+                        <label for="profilePic">Profile Picture</label>
+                        <input type="file" class="form-control" id="profilePic" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label for="resume">Resume</label>
+                        <input type="file" class="form-control" id="resume" accept=".doc,.docx,.pdf">
+                    </div>
+                    <button type="submit" class="btn btn-dark">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const profileForm = document.getElementById('profileForm');
+
+            // Load profile data from local storage
+            const profiles = JSON.parse(localStorage.getItem('profiles')) || [];
+            const currentProfile = profiles[profiles.length - 1]; // Assuming the last profile is the current user's profile
+
+            if (currentProfile) {
+                document.getElementById('name').value = currentProfile.name;
+                document.getElementById('age').value = currentProfile.age;
+                document.getElementById('email').value = currentProfile.email;
+                document.getElementById('status').value = currentProfile.status;
+                document.getElementById('skills').value = currentProfile.skills;
+
+                if (currentProfile.status === 'studying') {
+                    document.getElementById('yearOfStudy').value = currentProfile.yearOfStudy;
+                    document.getElementById('course').value = currentProfile.course;
+                    document.getElementById('studyFields').style.display = 'block';
+                } else if (currentProfile.status === 'passedOut') {
+                    document.getElementById('yearsOfExperience').value = currentProfile.yearsOfExperience;
+                    document.getElementById('fieldOfExperience').value = currentProfile.fieldOfExperience;
+                    document.getElementById('experienceFields').style.display = 'block';
+                }
+            }
+
+            // Handle form submission for editing profile
+            profileForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Update profile data
+                currentProfile.name = document.getElementById('name').value;
+                currentProfile.age = document.getElementById('age').value;
+                currentProfile.email = document.getElementById('email').value;
+                currentProfile.status = document.getElementById('status').value;
+                currentProfile.skills = document.getElementById('skills').value;
+
+                if (currentProfile.status === 'studying') {
+                    currentProfile.yearOfStudy = document.getElementById('yearOfStudy').value;
+                    currentProfile.course = document.getElementById('course').value;
+                } else if (currentProfile.status === 'passedOut') {
+                    currentProfile.yearsOfExperience = document.getElementById('yearsOfExperience').value;
+                    currentProfile.fieldOfExperience = document.getElementById('fieldOfExperience').value;
+                }
+
+                // Update local storage with edited profile
+                profiles[profiles.length - 1] = currentProfile;
+                localStorage.setItem('profiles', JSON.stringify(profiles));
+
+                alert('Changes saved successfully!');
+            });
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  width: 150px;
+}
+
+/* Banner Section */
+.banner-section-bg-container {
+  background: url('pics/boo.jpg') no-repeat center center/cover;
+  background-size: contain;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+}
+
+.banner-heading {
+  font-size: 3rem;
+  font-weight: bold;
+  color: black;
+}
+
+.banner-caption {
+  font-size: 1.5rem;
+  color: black;
+}
+
+.custom-button, .custom-outline-button {
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.custom-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+}
+
+.custom-outline-button {
+  background-color: transparent;
+  color: #007bff;
+  border: 2px solid #007bff;
+}
+
+/* Why Choose Us Section */
+.wcu-section {
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.wcu-section-heading {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.wcu-section-description {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+}
+
+.wcu-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  text-align: center;
+  padding: 20px;
+}
+
+.wcu-card:hover {
+  transform: translateY(-10px);
+}
+
+.wcu-card-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin: auto;
+}
+
+.wcu-card-title {
+  font-size: 1.5rem;
+  margin-top: 15px;
+}
+
+.custom-button {
+  background-color: black;
+  color: #fff;
+  border-radius: 5px;
+}
+
+/* Recruitment Process Section */
+.explore-menu-section {
+  background-color: #fff;
+  text-align: center;
+}
+
+.menu-section-heading {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.process {
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.process h1 {
+  font-size: 2rem;
+  margin-right: 20px;
+}
+
+.process p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Placements Section */
+.maintopcards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.topcards {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+  margin: 10px;
+  padding: 20px;
+}
+
+.topcards h1 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.topcards ul {
+  list-style: none;
+  padding: 0;
+  font-size: 1rem;
+}
+
+.topcards .companies img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin: auto;
+}
+
+.placements2 {
+  padding: 10px;
+  background-color: #fff;
+}
+
+.marquee {
+  font-size: 1rem;
+  color: #000;
+}
+
+.marquee img {
+  vertical-align: middle;
+  margin: 0 10px;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+/* Follow Us Section */
+.follow-section {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+.follow-section-heading {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.follow-section-description {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+}
+
+.social-media-icons .social-icon {
+  font-size: 2rem;
+  color: black;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+.social-media-icons .social-icon:hover {
+  color: black;
+}
+
+/* Footer */
+.footer {
+  background-color: black;
+  color: #fff;
+  padding: 20px 0;
+}
+
+.footer p {
+  margin: 0;
+}
+
+.placments2{
+  margin: 50PX;  
+}
+
+.scrolling-line{
+  font-family: 'Poppins', sans-serif;
+  font-size: 35px;
+  font-weight: 700;
+  padding: 10px;
+
+}
+.placments{
+  margin: 20px;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 55px;  
+}
+
+.none2{
+  list-style-type: none;
+  font-weight: 500;
+  font-size:20px ;
+  text-align: center;
+}
+
+.in{
+  height: 142px;
+  width: 149px;
+  border: 2px solid black;
+  margin: auto;
+  background-color:white;
+  border-radius: 13px;
+
+}
+
+
+.images1, .images2, .images3, .images4, .images5, .images6 {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100px;
+  width: 100%;
+  border-radius: 13px;
+}
+
+.images1 {
+  background-image: url(pics/acc2.jpg);
+}
+
+.images2 {
+  background-image: url(pics/acc.jpg);
+}
+
+
+.images3{
+  background-image: url(pics/epam.jpg);
+}
+
+.images4{
+  background-image: url(pics/cybage.jpg);
+}
+
+.images5{
+  background-image: url(pics/dxc.jpg);
+}
+
+.images6{
+  background-image: url(pics/par.webp);
+}

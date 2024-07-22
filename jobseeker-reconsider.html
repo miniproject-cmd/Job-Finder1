@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reconsideration List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .rounded-circle {
+            width: 150px; /* Adjust size as needed */
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .card {
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Reconsideration List</h1>
+        <div id="reconsiderCompanyList" class="row mt-4"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const reconsiderCompanyList = document.getElementById('reconsiderCompanyList');
+
+            // Function to get reconsidered companies from local storage
+            function getReconsideredCompanies() {
+                return JSON.parse(localStorage.getItem('reconsideredCompanies')) || [];
+            }
+
+            // Function to save reconsidered companies to local storage
+            function saveReconsideredCompanies(companies) {
+                localStorage.setItem('reconsideredCompanies', JSON.stringify(companies));
+            }
+
+            // Function to display companies in reconsideration list
+            function displayReconsiderCompanies() {
+                const companies = getReconsideredCompanies();
+                reconsiderCompanyList.innerHTML = '';
+                if (companies.length === 0) {
+                    reconsiderCompanyList.innerHTML = '<p>No companies in reconsideration list.</p>';
+                } else {
+                    companies.forEach((company, index) => {
+                        const cardHtml = `
+                            <div class="col-md-4 mb-4">
+                                <div class="card shadow">
+                                    <img src="${company.logo}" class="card-img-top rounded-circle" alt="${company.name} Logo">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${company.name}</h5>
+                                        <p class="card-text">${company.description}</p>
+                                        <button class="btn btn-primary" onclick="viewDetails(${index})">View Details</button>
+                                        <button class="btn btn-danger" onclick="removeFromReconsider(${index})">Remove from Reconsideration</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        reconsiderCompanyList.innerHTML += cardHtml;
+                    });
+                }
+            }
+
+            // Function to view details of a company in reconsideration list
+            window.viewDetails = function(index) {
+                const companies = getReconsideredCompanies();
+                const company = companies[index];
+                const detailsHtml = `
+                    <div>
+                        <h5>${company.name} Details:</h5>
+                        <p>Description: ${company.description}</p>
+                        <p>Email: ${company.email}</p>
+                        <button class="btn btn-secondary" onclick="displayReconsiderCompanies()">Back to Reconsideration List</button>
+                    </div>
+                `;
+                reconsiderCompanyList.innerHTML = detailsHtml;
+            };
+
+            // Function to remove a company from reconsideration list
+            window.removeFromReconsider = function(index) {
+                const companies = getReconsideredCompanies();
+                companies.splice(index, 1);
+                saveReconsideredCompanies(companies);
+                displayReconsiderCompanies();
+            };
+
+            // Initial display of companies in reconsideration list when page loads
+            displayReconsiderCompanies();
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

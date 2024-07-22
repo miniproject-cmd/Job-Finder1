@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reconsider Profiles - JobSeeker</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 70px; /* Adjust this value based on your navbar height */
+            background-color: #f8f9fa;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .card-header {
+            font-weight: bold;
+        }
+        .modal-body {
+            text-align: left;
+        }
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                Reconsider Profiles
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav ml-auto">
+                    <!-- Add any additional navbar items here -->
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 text-center">
+        <div class="row" id="profileList">
+            <!-- Profile cards will be dynamically added here -->
+        </div>
+    </div>
+
+    <!-- Profile Details Modal -->
+    <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="profileModalLabel">Profile Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="profileModalBody">
+                    <!-- Profile details will be dynamically added here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="sendEmailBtn">Send Email</button>
+                    <button type="button" class="btn btn-danger" id="notInterestedBtn">Not Interested</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const reconsiderProfiles = JSON.parse(localStorage.getItem('reconsiderProfiles')) || [];
+            const profileList = document.getElementById('profileList');
+
+            // Function to render profile cards
+            function renderProfiles() {
+                profileList.innerHTML = '';
+                reconsiderProfiles.forEach(profile => {
+                    const card = `
+                        <div class="col-md-4">
+                            <div class="card">
+                                <img src="${profile.profilePic}" class="card-img-top profile-pic" alt="Profile Picture">
+                                <div class="card-body">
+                                    <h5 class="card-title">${profile.name}</h5>
+                                    <p class="card-text"><strong>Email:</strong> ${profile.email}</p>
+                                    <button class="btn btn-primary view-profile-btn" data-profile='${JSON.stringify(profile)}' data-toggle="modal" data-target="#profileModal">View Profile</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    profileList.innerHTML += card;
+                });
+            }
+
+            renderProfiles();
+
+            // Event listener for view profile button in modal
+            $('#profileModal').on('show.bs.modal', function (e) {
+                const profile = JSON.parse(e.relatedTarget.getAttribute('data-profile'));
+                const modalBody = document.getElementById('profileModalBody');
+                modalBody.innerHTML = `
+                    <div class="text-center mb-3">
+                        <img src="${profile.profilePic}" class="profile-pic" alt="Profile Picture">
+                    </div>
+                    <p><strong>Name:</strong> ${profile.name}</p>
+                    <p><strong>Age:</strong> ${profile.age}</p>
+                    <p><strong>Email:</strong> ${profile.email}</p>
+                    <p><strong>Status:</strong> ${profile.status}</p>
+                    <p><strong>Skills:</strong> ${profile.skills}</p>
+                    <p><strong>Resume:</strong> <a href="${profile.resume}" download>Download Resume</a></p>
+                `;
+
+                // Send email button functionality
+                const sendEmailBtn = document.getElementById('sendEmailBtn');
+                sendEmailBtn.addEventListener('click', function () {
+                    window.location.href = 'mailto:' + profile.email;
+                });
+
+                // Not interested button functionality
+                const notInterestedBtn = document.getElementById('notInterestedBtn');
+                notInterestedBtn.addEventListener('click', function () {
+                    const updatedReconsiderProfiles = reconsiderProfiles.filter(p => p.email !== profile.email);
+                    localStorage.setItem('reconsiderProfiles', JSON.stringify(updatedReconsiderProfiles));
+                    renderProfiles(); // Update UI after removal
+                    alert('Profile removed from Reconsider list');
+                });
+            });
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

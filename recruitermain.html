@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruitment Process</title>
+    <link rel="stylesheet" href="mainpage.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/ac42c3b1f7.js" crossorigin="anonymous"></script>
+    <style>
+        .logo {
+            width: 150px;
+        }
+        
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-img-top {
+            object-fit: contain;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="pics/job-finder-high-resolution-logo-black-transparent.png" class="logo" alt="Job Finder Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav ml-auto">
+                    <!-- Add any additional navbar items here -->
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 pt-5">
+        <div class="text-center">
+            <h1>Welcome Recruiter!</h1>
+            <p class="lead">Start Recruiting !</p>
+        </div>
+        
+        <div class="row mt-4">
+
+            <div class="col-lg-4 col-md-6 mb-4 text-center">
+                <div class="card">
+                    <img src="pics/gg.webp" class="card-img-top" alt="Profile">
+                    <div class="card-body">
+                        <h5 class="card-title">View All Student Profiles</h5>
+                        <p class="card-text">View all student profiles added to platform.</p>
+                        <a href="view-all-profiles.html" class="btn btn-dark">View Profiles</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4 text-center">
+                <div class="card">
+                    <img src="pics/intern.jpg" class="card-img-top" alt="Interview Tips">
+                    <div class="card-body">
+                        <h5 class="card-title">Reconsideration List</h5>
+                        <p class="card-text">Look Out For The Employees You Rejected.</p>
+                        <a href="reconsider.html" class="btn btn-dark">View List</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4 text-center">
+                <div class="card">
+                    <img src="pics/j.jpg" class="card-img-top" alt="Add Job Positions">
+                    <div class="card-body">
+                        <h5 class="card-title">Add Job Positions</h5>
+                        <p class="card-text">Add Or Remove new job positions.</p>
+                        <a href="add-job-positions.html" class="btn btn-dark">Add Positions</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
